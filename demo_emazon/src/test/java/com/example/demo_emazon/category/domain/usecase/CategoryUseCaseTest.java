@@ -1,11 +1,11 @@
 package com.example.demo_emazon.category.domain.usecase;
 
+import com.example.demo_emazon.category.domain.exception.*;
 import com.example.demo_emazon.category.domain.model.Category;
 import com.example.demo_emazon.category.domain.spi.ICategoryPersistencePort;
 import com.example.demo_emazon.category.domain.util.pagination.Pagination;
 import com.example.demo_emazon.testdata.Constants;
 import com.example.demo_emazon.testdata.TestData.TestDataCategory;
-import com.example.demo_emazon.testdata.exceptioncategory.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -197,12 +197,12 @@ class CategoryUseCaseTest {
 
         when(categoryPersistencePort.findAll()).thenReturn(allCategories);
 
-        Pagination<Category> pagination = categoryUseCase.listCategory(3, 1, "asc");
+        Pagination<Category> pagination = categoryUseCase.listCategory(4, 1, "asc");
 
         assertTrue(pagination.getContent().isEmpty());
-        assertEquals(3, pagination.getPageNumber());
+        assertEquals(4, pagination.getPageNumber());
         assertEquals(1, pagination.getPageSize());
-        assertEquals(2, pagination.getTotalElements());
+        assertEquals(3, pagination.getTotalElements());
         verify(categoryPersistencePort, times(1)).findAll();
     }
 
@@ -218,7 +218,7 @@ class CategoryUseCaseTest {
         assertTrue(pagination.getContent().isEmpty());
         assertEquals(0, pagination.getPageNumber());
         assertEquals(1, pagination.getPageSize());
-        assertEquals(2, pagination.getTotalElements());
+        assertEquals(3, pagination.getTotalElements());
         verify(categoryPersistencePort, times(1)).findAll();
     }
 }

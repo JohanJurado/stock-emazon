@@ -20,8 +20,7 @@ public class TestDataCategory {
     }
 
     public static List<Category> getListCategories(){
-        List<Category> allCategories = Arrays.asList(Constants.CATEGORY1, Constants.CATEGORY2, Constants.CATEGORY3);
-        return allCategories;
+        return Arrays.asList(Constants.CATEGORY1, Constants.CATEGORY2, Constants.CATEGORY3);
     }
 
     public static CategoryResponse getCategoryResponse(){
