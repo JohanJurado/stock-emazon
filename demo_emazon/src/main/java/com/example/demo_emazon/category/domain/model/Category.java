@@ -2,40 +2,40 @@ package com.example.demo_emazon.category.domain.model;
 
 public class Category {
 
-    private Long id;
-    private String name;
-    private String description;
+    private Long idCategory;
+    private String nameCategory;
+    private String descriptionCategory;
 
     public Category() {
     }
 
-    public Category(Long id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
+    public Category(Long idCategory, String nameCategory, String descriptionCategory) {
+        this.idCategory = idCategory;
+        this.nameCategory = nameCategory;
+        this.descriptionCategory = descriptionCategory;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdCategory() {
+        return idCategory;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdCategory(Long idCategory) {
+        this.idCategory = idCategory;
     }
 
-    public String getName() {
-        return name;
+    public String getNameCategory() {
+        return nameCategory;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameCategory(String nameCategory) {
+        this.nameCategory = nameCategory;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescriptionCategory() {
+        return descriptionCategory;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescriptionCategory(String descriptionCategory) {
+        this.descriptionCategory = descriptionCategory;
     }
 }

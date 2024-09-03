@@ -25,19 +25,22 @@ public class CategoryUseCase implements ICategoryServicePort {
 
     @Override
     public Category createCategory(Category category) {
-        if (category.getName()==null || category.getName().trim().isEmpty()){
+        if (category.getNameCategory()==null || category.getNameCategory().trim().isEmpty()){
             throw new TheNameCannotBeEmpty(ExceptionConstants.THE_NAME_CANNOT_BE_EMPTY.getMessage());
-        } else if (categoryPersistencePort.findByName(category.getName())!=null){
-            throw new CategoryAlreadyExistException(ExceptionConstants.CATEGORY_ALREADY_EXIST.getMessage(), category.getName());
-        } else if (category.getName().length() > Constants.MAX_NUM){
-            throw new MaxiumNameSizeExceededException(ExceptionConstants.MAXIUM_NAME_SIZE_EXCEEDED.getMessage(), category.getName().length());
+        } else if (categoryPersistencePort.findByName(category.getNameCategory())!=null){
+            throw new CategoryAlreadyExistException(ExceptionConstants.CATEGORY_ALREADY_EXIST.getMessage(), category.getNameCategory());
+        } else if (category.getNameCategory().length() > Constants.MAX_NUM){
+            throw new MaxiumNameSizeExceededException(ExceptionConstants.MAXIUM_NAME_SIZE_EXCEEDED.getMessage(), category.getNameCategory().length());
         }
 
-        if (category.getDescription()==null || category.getDescription().trim().isEmpty()){
+        if (category.getDescriptionCategory()==null || category.getDescriptionCategory().trim().isEmpty()){
             throw new TheDescriptionCannotBeEmpty(ExceptionConstants.THE_DESCRIPTION_CANNOT_BE_EMPTY.getMessage());
-        } else if (category.getDescription().length() > Constants.MAX_DESCRIPTION){
-            throw new MaxiumDescriptionSizeExceededException(ExceptionConstants.MAXIUM_DESCRIPTION_SIZE_EXCEEDED.getMessage(), category.getDescription().length());
+        } else if (category.getDescriptionCategory().length() > Constants.MAX_DESCRIPTION){
+            throw new MaxiumDescriptionSizeExceededException(ExceptionConstants.MAXIUM_DESCRIPTION_SIZE_EXCEEDED.getMessage(), category.getDescriptionCategory().length());
         }
+
+        category.setNameCategory(category.getNameCategory().trim());
+        category.setDescriptionCategory(category.getDescriptionCategory().trim());
         return categoryPersistencePort.save(category);
     }
 
@@ -46,9 +49,9 @@ public class CategoryUseCase implements ICategoryServicePort {
         List<Category> allCategories = new ArrayList<>(categoryPersistencePort.findAll());
 
         if ("asc".equalsIgnoreCase(sortDirection)){
-            allCategories.sort(Comparator.comparing(Category::getName));
+            allCategories.sort(Comparator.comparing(Category::getNameCategory));
         } else if ("desc".equalsIgnoreCase(sortDirection)){
-            allCategories.sort(Comparator.comparing(Category::getName).reversed());
+            allCategories.sort(Comparator.comparing(Category::getNameCategory).reversed());
         }
 
         int totalElements = allCategories.size();

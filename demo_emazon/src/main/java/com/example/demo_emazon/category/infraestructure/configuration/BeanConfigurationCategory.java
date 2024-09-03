@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
-public class BeanConfiguration {
+public class BeanConfigurationCategory {
 
     private final ICategoryJpaRepository categoryJpaRepository;
     private final ICategoryEntityMapper categoryEntityMapper;

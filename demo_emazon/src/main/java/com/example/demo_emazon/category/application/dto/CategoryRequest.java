@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CategoryRequest {
 
-    private String name;
-    private String description;
+    private String nameCategory;
+    private String descriptionCategory;
 
 }

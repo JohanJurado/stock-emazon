@@ -16,8 +16,11 @@ public class CategoryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private String description;
+    @Column(name = "id_cat")
+    private Long idCategory;
+    @Column(name = "name_cat")
+    private String nameCategory;
+    @Column(name = "description_cat")
+    private String descriptionCategory;
 
 }

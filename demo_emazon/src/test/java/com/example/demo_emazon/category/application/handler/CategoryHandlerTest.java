@@ -9,13 +9,12 @@ import com.example.demo_emazon.category.application.mapper.ICategoryMapper;
 import com.example.demo_emazon.category.domain.api.ICategoryServicePort;
 import com.example.demo_emazon.category.domain.model.Category;
 import com.example.demo_emazon.category.domain.util.pagination.Pagination;
-import org.junit.jupiter.api.BeforeEach;
+import com.example.demo_emazon.testdata.TestData.TestDataCategory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
@@ -35,10 +34,10 @@ class CategoryHandlerTest {
     @Test
     @DisplayName("Create a New Category correctly")
     void testSave() {
-        CategoryRequest categoryRequest = new CategoryRequest();
-        Category category = new Category();
-        Category savedCategory = new Category();
-        CategoryResponse expectedResponse = new CategoryResponse();
+        CategoryRequest categoryRequest = TestDataCategory.getCategoryRequest();
+        Category category = TestDataCategory.getCategory();
+        Category savedCategory = TestDataCategory.getCategory();
+        CategoryResponse expectedResponse = TestDataCategory.getCategoryResponse();
 
         when(categoryMapper.toCategory(categoryRequest)).thenReturn(category);
         when(categoryServicePort.createCategory(category)).thenReturn(savedCategory);

@@ -113,6 +113,15 @@
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.eclipse.angus:angus-activation:2.0.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.glassfish.jaxb:txw2:4.0.5" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.sun.istack:istack-commons-runtime:4.1.2" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/annotations/24.0.0/annotations-24.0.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
   <component name="TestModuleProperties" production-module="demo_emazon.main" />
 </module>

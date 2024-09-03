@@ -4,6 +4,8 @@ import com.example.demo_emazon.category.domain.model.Category;
 import com.example.demo_emazon.category.infraestructure.out.jpa.entity.CategoryEntity;
 import com.example.demo_emazon.category.infraestructure.out.jpa.mapper.ICategoryEntityMapper;
 import com.example.demo_emazon.category.infraestructure.out.jpa.repository.ICategoryJpaRepository;
+import com.example.demo_emazon.testdata.Constants;
+import com.example.demo_emazon.testdata.TestData.TestDataCategory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,8 +36,8 @@ class CategoryJpaAdapterTest {
     @Test
     @DisplayName("Test Save Category")
     void testSaveCategory() {
-        Category category = new Category(1L, "Electronics", "Electronics Description");
-        CategoryEntity categoryEntity = new CategoryEntity(1L, "Electronics", "Electronics Description");
+        Category category = TestDataCategory.getCategory();
+        CategoryEntity categoryEntity = TestDataCategory.getCategoryEntity();
 
         when(categoryEntityMapper.toEntity(any(Category.class))).thenReturn(categoryEntity);
         when(categoryJpaRepository.save(any(CategoryEntity.class))).thenReturn(categoryEntity);
@@ -52,10 +54,10 @@ class CategoryJpaAdapterTest {
     @Test
     @DisplayName("Test Find All Responses")
     void testFindAllCategories() {
-        CategoryEntity categoryEntity1 = new CategoryEntity(1L, "Electronics", "Electronics Description");
-        CategoryEntity categoryEntity2 = new CategoryEntity(2L, "Books", "Books Description");
-        Category category1 = new Category(1L, "Electronics", "Electronics Description");
-        Category category2 = new Category(2L, "Books", "Books Description");
+        CategoryEntity categoryEntity1 = TestDataCategory.getCategoryEntity();
+        CategoryEntity categoryEntity2 = TestDataCategory.getCategoryEntity();
+        Category category1 = TestDataCategory.getCategory();
+        Category category2 = TestDataCategory.getCategory();
 
         when(categoryJpaRepository.findAll()).thenReturn(List.of(categoryEntity1, categoryEntity2));
         when(categoryEntityMapper.toCategory(categoryEntity1)).thenReturn(category1);
@@ -74,9 +76,9 @@ class CategoryJpaAdapterTest {
     @Test
     @DisplayName("Test Find Category with a name")
     void testFindCategoryByName() {
-        String name = "Electronics";
-        CategoryEntity categoryEntity = new CategoryEntity(1L, name, "Electronics Description");
-        Category category = new Category(1L, name, "Electronics Description");
+        String name = Constants.NAME;
+        CategoryEntity categoryEntity = TestDataCategory.getCategoryEntity();
+        Category category = TestDataCategory.getCategory();
 
         when(categoryJpaRepository.findByName(name)).thenReturn(Optional.of(categoryEntity));
         when(categoryEntityMapper.toCategory(categoryEntity)).thenReturn(category);

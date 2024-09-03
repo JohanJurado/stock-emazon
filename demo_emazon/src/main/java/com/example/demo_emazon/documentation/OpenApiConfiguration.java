@@ -1,4 +1,4 @@
-package com.example.demo_emazon.category.infraestructure.documentation;
+package com.example.demo_emazon.documentation;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

@@ -1,10 +1,11 @@
 package com.example.demo_emazon.category.domain.usecase;
 
-import com.example.demo_emazon.category.domain.exception.*;
 import com.example.demo_emazon.category.domain.model.Category;
 import com.example.demo_emazon.category.domain.spi.ICategoryPersistencePort;
 import com.example.demo_emazon.category.domain.util.pagination.Pagination;
-import com.example.demo_emazon.testdata.TestData;
+import com.example.demo_emazon.testdata.Constants;
+import com.example.demo_emazon.testdata.TestData.TestDataCategory;
+import com.example.demo_emazon.testdata.exceptioncategory.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,9 +30,9 @@ class CategoryUseCaseTest {
     @Test
     @DisplayName("Create a New Category correctly")
     void verifyWhenCategoryReturnsCorrectCreatedStatus() {
-        Category category = TestData.getCategory();
+        Category category = TestDataCategory.getCategory();
         Mockito.when(categoryPersistencePort.save(category)).thenReturn(category);
-        Mockito.when(categoryPersistencePort.findByName(category.getName())).thenReturn(null);
+        Mockito.when(categoryPersistencePort.findByName(category.getNameCategory())).thenReturn(null);
 
         Category resultado = categoryUseCase.createCategory(category);
 
@@ -44,10 +44,9 @@ class CategoryUseCaseTest {
     @Test
     @DisplayName("Verify that when entering a name exist, an exception is returned")
     void verifyCategoryAlreadyExistException() {
-        Category category = TestData.getCategory();
+        Category category = TestDataCategory.getCategory();
 
-
-        Mockito.when(categoryPersistencePort.findByName(category.getName())).
+        Mockito.when(categoryPersistencePort.findByName(category.getNameCategory())).
                 thenReturn(category);
 
         assertThrows(
@@ -63,11 +62,10 @@ class CategoryUseCaseTest {
     @Test
     @DisplayName("Verify that when entering a name greater than 50 characters, an exception is returned")
     void verifyMaxiumNameSizeExceededException() {
-        Category category = TestData.getCategory();
-        category.setName("123451234512345123451234512345123451234512345123451234512345");
+        Category category = TestDataCategory.getCategory();
+        category.setNameCategory(Constants.MAX_NAME);
 
-
-        Mockito.when(categoryPersistencePort.findByName(category.getName()))
+        Mockito.when(categoryPersistencePort.findByName(category.getNameCategory()))
                 .thenReturn(null);
 
         assertThrows(
@@ -83,11 +81,11 @@ class CategoryUseCaseTest {
     @Test
     @DisplayName("Verify that when entering a description greater than 90 characters, an exception is returned")
     void verifyMaxiumDescriptonSizeExceededException() {
-        Category category = TestData.getCategory();
-        category.setDescription("123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345");
+        Category category = TestDataCategory.getCategory();
+        category.setDescriptionCategory(Constants.MAX_DESCRIPTION_CATEGORY);
 
 
-        Mockito.when(categoryPersistencePort.findByName(category.getName()))
+        Mockito.when(categoryPersistencePort.findByName(category.getNameCategory()))
                 .thenReturn(null);
 
         assertThrows(
@@ -103,10 +101,10 @@ class CategoryUseCaseTest {
     @Test
     @DisplayName("Verify that when entering a name null, an exception is returned")
     void verifyNameCannotBeEmptyException() {
-        Category categoryEmpty = TestData.getCategory();
-        categoryEmpty.setName("");
-        Category categoryNull = TestData.getCategory();
-        categoryNull.setName(null);
+        Category categoryEmpty = TestDataCategory.getCategory();
+        categoryEmpty.setNameCategory(Constants.EMPTY);
+        Category categoryNull = TestDataCategory.getCategory();
+        categoryNull.setNameCategory(Constants.NULL);
 
         assertThrows(
                 TheNameCannotBeEmpty.class,
@@ -128,10 +126,10 @@ class CategoryUseCaseTest {
     @Test
     @DisplayName("Verify that when entering a description null, an exception is returned")
     void verifyDescriptionCannotBeEmptyException() {
-        Category categoryEmpty = TestData.getCategory();
-        categoryEmpty.setDescription("");
-        Category categoryNull = TestData.getCategory();
-        categoryNull.setDescription(null);
+        Category categoryEmpty = TestDataCategory.getCategory();
+        categoryEmpty.setDescriptionCategory(Constants.EMPTY);
+        Category categoryNull = TestDataCategory.getCategory();
+        categoryNull.setDescriptionCategory(Constants.NULL);
 
         assertThrows(
                 TheDescriptionCannotBeEmpty.class,
@@ -151,76 +149,56 @@ class CategoryUseCaseTest {
 
     @Test
     void testListCategoryAscending() {
-        // Arrange
-        Category category1 = new Category(1L, "Books", "Books category");
-        Category category2 = new Category(2L, "Electronics", "Electronics category");
-        Category category3 = new Category(3L, "Furniture", "Furniture category");
 
-        List<Category> allCategories = Arrays.asList(category2, category3, category1);
+        List<Category> allCategories = TestDataCategory.getListCategories();
         when(categoryPersistencePort.findAll()).thenReturn(allCategories);
 
-            // Act
         Pagination<Category> pagination = categoryUseCase.listCategory(1, 2, "asc");
 
-            // Assert
         assertEquals(2, pagination.getContent().size());
-        assertEquals("Books", pagination.getContent().get(0).getName());
-        assertEquals("Electronics", pagination.getContent().get(1).getName());
+        assertEquals("Books", pagination.getContent().get(0).getNameCategory());
+        assertEquals("Electronics", pagination.getContent().get(1).getNameCategory());
         verify(categoryPersistencePort, times(1)).findAll();
     }
 
     @Test
     void testListCategoryDescending() {
-        // Arrange
-        Category category1 = new Category(1L, "Books", "Books category");
-        Category category2 = new Category(2L, "Electronics", "Electronics category");
-        Category category3 = new Category(3L, "Furniture", "Furniture category");
 
-        List<Category> allCategories = Arrays.asList(category2, category3, category1);
+        List<Category> allCategories = TestDataCategory.getListCategories();
+
         when(categoryPersistencePort.findAll()).thenReturn(allCategories);
 
-            // Act
         Pagination<Category> pagination = categoryUseCase.listCategory(1, 2, "desc");
 
-            // Assert
         assertEquals(2, pagination.getContent().size());
-        assertEquals("Furniture", pagination.getContent().get(0).getName());
-        assertEquals("Electronics", pagination.getContent().get(1).getName());
+        assertEquals("Furniture", pagination.getContent().get(0).getNameCategory());
+        assertEquals("Electronics", pagination.getContent().get(1).getNameCategory());
         verify(categoryPersistencePort, times(1)).findAll();
     }
 
     @Test
     void testListCategoryPagination() {
-            // Arrange
-        Category category1 = new Category(1L, "Books", "Books category");
-        Category category2 = new Category(2L, "Electronics", "Electronics category");
-        Category category3 = new Category(3L, "Furniture", "Furniture category");
 
-        List<Category> allCategories = Arrays.asList(category1, category2, category3);
+        List<Category> allCategories = TestDataCategory.getListCategories();
+
         when(categoryPersistencePort.findAll()).thenReturn(allCategories);
 
-            // Act
         Pagination<Category> pagination = categoryUseCase.listCategory(2, 1, "asc");
 
-            // Assert
         assertEquals(1, pagination.getContent().size());
-        assertEquals("Electronics", pagination.getContent().get(0).getName());
+        assertEquals("Electronics", pagination.getContent().get(0).getNameCategory());
         verify(categoryPersistencePort, times(1)).findAll();
     }
 
     @Test
     void testListCategoryOutOfBounds() {
-        // Arrange
-        Category category1 = new Category(1L, "Books", "Books category");
-        Category category2 = new Category(2L, "Electronics", "Electronics category");
 
-        List<Category> allCategories = Arrays.asList(category1, category2);
+        List<Category> allCategories = TestDataCategory.getListCategories();
+
         when(categoryPersistencePort.findAll()).thenReturn(allCategories);
 
-            // Act
         Pagination<Category> pagination = categoryUseCase.listCategory(3, 1, "asc");
 
-            // Assert
         assertTrue(pagination.getContent().isEmpty());
         assertEquals(3, pagination.getPageNumber());
         assertEquals(1, pagination.getPageSize());
@@ -230,17 +208,13 @@ class CategoryUseCaseTest {
 
     @Test
     void testListCategoryPage0() {
-        // Arrange
-        Category category1 = new Category(1L, "Books", "Books category");
-        Category category2 = new Category(2L, "Electronics", "Electronics category");
 
-        List<Category> allCategories = Arrays.asList(category1, category2);
+        List<Category> allCategories = TestDataCategory.getListCategories();
+
         when(categoryPersistencePort.findAll()).thenReturn(allCategories);
 
-        // Act
         Pagination<Category> pagination = categoryUseCase.listCategory(0, 1, "asc");
 
-        // Assert
         assertTrue(pagination.getContent().isEmpty());
         assertEquals(0, pagination.getPageNumber());
         assertEquals(1, pagination.getPageSize());
