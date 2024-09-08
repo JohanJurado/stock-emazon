@@ -3,19 +3,18 @@ package com.example.demo_emazon.brand.application.mapper;
 import com.example.demo_emazon.brand.application.dto.BrandRequest;
 import com.example.demo_emazon.brand.application.dto.BrandResponse;
 import com.example.demo_emazon.brand.domain.model.Brand;
-import com.example.demo_emazon.brand.domain.util.Pagination;
+import com.example.demo_emazon.util.pagination.Pagination;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring",
-        unmappedTargetPolicy = ReportingPolicy.IGNORE,
-        unmappedSourcePolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring")
 public interface IBrandMapper {
 
     IBrandMapper INSTANCE = Mappers.getMapper(IBrandMapper.class);
 
+    @Mapping(target = "idBrand", ignore = true)
     @Mapping(target = "nameBrand", source="nameBrand")
     @Mapping(target = "descriptionBrand", source="descriptionBrand")
     Brand toBrand(BrandRequest brandRequest);

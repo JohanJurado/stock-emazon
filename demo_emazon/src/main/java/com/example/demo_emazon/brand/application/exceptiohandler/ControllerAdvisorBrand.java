@@ -5,7 +5,7 @@ import com.example.demo_emazon.brand.domain.exception.MaxiumDescriptionSizeExcee
 import com.example.demo_emazon.brand.domain.exception.MaxiumNameSizeExceededException;
 import com.example.demo_emazon.brand.domain.exception.TheNameCannotBeEmpty;
 import com.example.demo_emazon.brand.domain.exception.TheDescriptionCannotBeEmpty;
-import com.example.demo_emazon.brand.domain.util.constants.ExceptionConstants;
+import com.example.demo_emazon.brand.domain.util.constants.ExceptionConstantsBrand;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -44,14 +44,14 @@ public class ControllerAdvisorBrand {
     public ResponseEntity<Map<String, String>> handleTheNameCannotBeEmpty(
             TheNameCannotBeEmpty theNameCannotBeEmpty) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(Collections.singletonMap(MESSAGE, ExceptionConstants.THE_NAME_CANNOT_BE_EMPTY.getMessage()));
+                .body(Collections.singletonMap(MESSAGE, ExceptionConstantsBrand.THE_NAME_CANNOT_BE_EMPTY.getMessage()));
     }
 
     @ExceptionHandler(TheDescriptionCannotBeEmpty.class)
     public ResponseEntity<Map<String, String>> handleTheDescriptionCannotBeEmpty(
             TheDescriptionCannotBeEmpty theDescriptionCannotBeEmpty) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(Collections.singletonMap(MESSAGE, ExceptionConstants.THE_DESCRIPTION_CANNOT_BE_EMPTY.getMessage()));
+                .body(Collections.singletonMap(MESSAGE, ExceptionConstantsBrand.THE_DESCRIPTION_CANNOT_BE_EMPTY.getMessage()));
     }
 
 }

@@ -4,8 +4,8 @@ import com.example.demo_emazon.category.domain.model.Category;
 import com.example.demo_emazon.category.infraestructure.out.jpa.entity.CategoryEntity;
 import com.example.demo_emazon.category.infraestructure.out.jpa.mapper.ICategoryEntityMapper;
 import com.example.demo_emazon.category.infraestructure.out.jpa.repository.ICategoryJpaRepository;
-import com.example.demo_emazon.testdata.Constants;
-import com.example.demo_emazon.testdata.TestData.TestDataCategory;
+import com.example.demo_emazon.util.Constants;
+import com.example.demo_emazon.util.TestData.TestDataCategory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -80,13 +80,13 @@ class CategoryJpaAdapterTest {
         CategoryEntity categoryEntity = TestDataCategory.getCategoryEntity();
         Category category = TestDataCategory.getCategory();
 
-        when(categoryJpaRepository.findByName(name)).thenReturn(Optional.of(categoryEntity));
+        when(categoryJpaRepository.findByNameCategory(name)).thenReturn(Optional.of(categoryEntity));
         when(categoryEntityMapper.toCategory(categoryEntity)).thenReturn(category);
 
         Category result = categoryJpaAdapter.findByName(name);
 
         assertEquals(category, result);
-        verify(categoryJpaRepository).findByName(name);
+        verify(categoryJpaRepository).findByNameCategory(name);
         verify(categoryEntityMapper).toCategory(categoryEntity);
     }
 

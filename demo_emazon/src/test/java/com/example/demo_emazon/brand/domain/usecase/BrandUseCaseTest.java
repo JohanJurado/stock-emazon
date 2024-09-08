@@ -2,10 +2,10 @@ package com.example.demo_emazon.brand.domain.usecase;
 
 import com.example.demo_emazon.brand.domain.model.Brand;
 import com.example.demo_emazon.brand.domain.spi.IBrandPersistencePort;
-import com.example.demo_emazon.brand.domain.util.Pagination;
-import com.example.demo_emazon.testdata.Constants;
-import com.example.demo_emazon.testdata.TestData.TestDataBrand;
+import com.example.demo_emazon.util.Constants;
+import com.example.demo_emazon.util.TestData.TestDataBrand;
 import com.example.demo_emazon.brand.domain.exception.*;
+import com.example.demo_emazon.util.pagination.Pagination;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

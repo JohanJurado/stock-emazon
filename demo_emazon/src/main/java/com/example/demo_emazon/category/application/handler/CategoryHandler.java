@@ -5,7 +5,7 @@ import com.example.demo_emazon.category.application.dto.CategoryResponse;
 import com.example.demo_emazon.category.application.mapper.ICategoryMapper;
 import com.example.demo_emazon.category.domain.api.ICategoryServicePort;
 import com.example.demo_emazon.category.domain.model.Category;
-import com.example.demo_emazon.category.domain.util.pagination.Pagination;
+import com.example.demo_emazon.util.pagination.Pagination;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
