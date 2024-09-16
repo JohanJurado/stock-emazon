@@ -4,8 +4,8 @@ import com.example.demo_emazon.brand.domain.model.Brand;
 import com.example.demo_emazon.brand.infraestructure.out.jpa.entity.BrandEntity;
 import com.example.demo_emazon.brand.infraestructure.out.jpa.mapper.IBrandEntityMapper;
 import com.example.demo_emazon.brand.infraestructure.out.jpa.repository.IBrandJpaRepository;
-import com.example.demo_emazon.testdata.Constants;
-import com.example.demo_emazon.testdata.TestData.TestDataBrand;
+import com.example.demo_emazon.util.Constants;
+import com.example.demo_emazon.util.TestData.TestDataBrand;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -66,7 +66,7 @@ class BrandJpaAdapterTest {
 
         List<Brand> result = brandJpaAdapter.findAll();
 
-        assertEquals(2, result.size());
+        assertEquals(Constants.PAGE_SIZE_2, result.size());
         assertEquals(brand1, result.get(0));
         assertEquals(brand2, result.get(1));
         verify(brandJpaRepository).findAll();

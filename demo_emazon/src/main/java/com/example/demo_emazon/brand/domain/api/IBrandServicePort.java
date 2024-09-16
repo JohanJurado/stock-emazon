@@ -1,7 +1,7 @@
 package com.example.demo_emazon.brand.domain.api;
 
 import com.example.demo_emazon.brand.domain.model.Brand;
-import com.example.demo_emazon.brand.domain.util.Pagination;
+import com.example.demo_emazon.util.pagination.Pagination;
 
 public interface IBrandServicePort {
 

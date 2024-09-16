@@ -3,7 +3,7 @@ package com.example.demo_emazon.category.infraestructure.input.rest;
 import com.example.demo_emazon.category.application.dto.CategoryRequest;
 import com.example.demo_emazon.category.application.dto.CategoryResponse;
 import com.example.demo_emazon.category.application.handler.ICategoryHandler;
-import com.example.demo_emazon.category.domain.util.pagination.Pagination;
+import com.example.demo_emazon.util.pagination.Pagination;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

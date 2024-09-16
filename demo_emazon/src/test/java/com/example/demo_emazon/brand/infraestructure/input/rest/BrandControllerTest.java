@@ -3,8 +3,9 @@ package com.example.demo_emazon.brand.infraestructure.input.rest;
 import com.example.demo_emazon.brand.application.dto.BrandRequest;
 import com.example.demo_emazon.brand.application.dto.BrandResponse;
 import com.example.demo_emazon.brand.application.handler.IBrandHandler;
-import com.example.demo_emazon.brand.domain.util.Pagination;
-import com.example.demo_emazon.testdata.TestData.TestDataBrand;
+import com.example.demo_emazon.util.Constants;
+import com.example.demo_emazon.util.TestData.TestDataBrand;
+import com.example.demo_emazon.util.pagination.Pagination;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -45,12 +46,12 @@ class BrandControllerTest {
 
     @Test
     void testListBrands() {
-        int page = 1;
-        int size = 10;
-        String sortDirection = "asc";
+        int page = Constants.PAGE_IN_RANGE;
+        int size = Constants.PAGE_SIZE_1;
+        String sortDirection = Constants.SORT_ASC;
 
         BrandResponse brandResponse = TestDataBrand.getBrandResponse();
-        Pagination<BrandResponse> pagination = new Pagination<>(List.of(brandResponse), page, size, 1);
+        Pagination<BrandResponse> pagination = new Pagination<>(List.of(brandResponse), page, size, Constants.PAGE_SIZE_1);
 
         when(brandHandler.listBrandResponses(page, size, sortDirection)).thenReturn(pagination);
 

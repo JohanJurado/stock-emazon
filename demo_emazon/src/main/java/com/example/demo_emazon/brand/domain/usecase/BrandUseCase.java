@@ -4,9 +4,9 @@ import com.example.demo_emazon.brand.domain.api.IBrandServicePort;
 import com.example.demo_emazon.brand.domain.exception.*;
 import com.example.demo_emazon.brand.domain.model.Brand;
 import com.example.demo_emazon.brand.domain.spi.IBrandPersistencePort;
-import com.example.demo_emazon.brand.domain.util.Pagination;
-import com.example.demo_emazon.brand.domain.util.constants.Constants;
-import com.example.demo_emazon.brand.domain.util.constants.ExceptionConstants;
+import com.example.demo_emazon.brand.domain.util.constants.ConstantsBrand;
+import com.example.demo_emazon.brand.domain.util.constants.ExceptionConstantsBrand;
+import com.example.demo_emazon.util.pagination.Pagination;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,17 +25,17 @@ public class BrandUseCase implements IBrandServicePort {
     @Override
     public Brand createBrand(Brand brand) {
         if (brand.getNameBrand()==null || brand.getNameBrand().trim().isEmpty()){
-            throw new TheNameCannotBeEmpty(ExceptionConstants.THE_NAME_CANNOT_BE_EMPTY.getMessage());
+            throw new TheNameCannotBeEmpty(ExceptionConstantsBrand.THE_NAME_CANNOT_BE_EMPTY.getMessage());
         } else if (brandPersistencePort.findByName(brand.getNameBrand())!=null){
-            throw new BrandAlreadyExistException(ExceptionConstants.BRAND_ALREADY_EXIST.getMessage(), brand.getNameBrand());
-        } else if (brand.getNameBrand().length() > Constants.MAX_NUM){
-            throw new MaxiumNameSizeExceededException(ExceptionConstants.MAXIUM_NAME_SIZE_EXCEEDED.getMessage(), brand.getNameBrand().length());
+            throw new BrandAlreadyExistException(ExceptionConstantsBrand.BRAND_ALREADY_EXIST.getMessage(), brand.getNameBrand());
+        } else if (brand.getNameBrand().length() > ConstantsBrand.MAX_NUM){
+            throw new MaxiumNameSizeExceededException(ExceptionConstantsBrand.MAXIUM_NAME_SIZE_EXCEEDED.getMessage(), brand.getNameBrand().length());
         }
 
         if (brand.getDescriptionBrand()==null || brand.getDescriptionBrand().trim().isEmpty()){
-            throw new TheDescriptionCannotBeEmpty(ExceptionConstants.THE_DESCRIPTION_CANNOT_BE_EMPTY.getMessage());
-        } else if (brand.getDescriptionBrand().length() > Constants.MAX_DESCRIPTION){
-            throw new MaxiumDescriptionSizeExceededException(ExceptionConstants.MAXIUM_DESCRIPTION_SIZE_EXCEEDED.getMessage(), brand.getDescriptionBrand().length());
+            throw new TheDescriptionCannotBeEmpty(ExceptionConstantsBrand.THE_DESCRIPTION_CANNOT_BE_EMPTY.getMessage());
+        } else if (brand.getDescriptionBrand().length() > ConstantsBrand.MAX_DESCRIPTION){
+            throw new MaxiumDescriptionSizeExceededException(ExceptionConstantsBrand.MAXIUM_DESCRIPTION_SIZE_EXCEEDED.getMessage(), brand.getDescriptionBrand().length());
         }
 
         brand.setNameBrand(brand.getNameBrand().trim());

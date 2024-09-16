@@ -33,7 +33,7 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
 
     @Override
     public Category findByName(String nameCategory) {
-        return categoryEntityMapper.toCategory(categoryJpaRepository.findByName(nameCategory).orElse(null));
+        return categoryEntityMapper.toCategory(categoryJpaRepository.findByNameCategory(nameCategory).orElse(null));
     }
 
 }

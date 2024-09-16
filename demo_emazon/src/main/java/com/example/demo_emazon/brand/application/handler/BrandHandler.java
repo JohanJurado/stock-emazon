@@ -5,7 +5,7 @@ import com.example.demo_emazon.brand.application.dto.BrandResponse;
 import com.example.demo_emazon.brand.application.mapper.IBrandMapper;
 import com.example.demo_emazon.brand.domain.api.IBrandServicePort;
 import com.example.demo_emazon.brand.domain.model.Brand;
-import com.example.demo_emazon.brand.domain.util.Pagination;
+import com.example.demo_emazon.util.pagination.Pagination;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -3,7 +3,7 @@ package com.example.demo_emazon.brand.infraestructure.input.rest;
 import com.example.demo_emazon.brand.application.dto.BrandRequest;
 import com.example.demo_emazon.brand.application.dto.BrandResponse;
 import com.example.demo_emazon.brand.application.handler.IBrandHandler;
-import com.example.demo_emazon.brand.domain.util.Pagination;
+import com.example.demo_emazon.util.pagination.Pagination;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

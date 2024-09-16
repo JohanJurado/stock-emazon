@@ -2,7 +2,7 @@ package com.example.demo_emazon.category.application.handler;
 
 import com.example.demo_emazon.category.application.dto.CategoryResponse;
 import com.example.demo_emazon.category.application.dto.CategoryRequest;
-import com.example.demo_emazon.category.domain.util.pagination.Pagination;
+import com.example.demo_emazon.util.pagination.Pagination;
 
 public interface ICategoryHandler {
 
