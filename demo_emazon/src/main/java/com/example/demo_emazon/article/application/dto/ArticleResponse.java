@@ -1,5 +1,7 @@
 package com.example.demo_emazon.article.application.dto;
 
+import com.example.demo_emazon.brand.domain.model.Brand;
+import com.example.demo_emazon.category.domain.model.Category;
 import lombok.*;
 
 import java.util.List;
@@ -16,7 +18,7 @@ public class ArticleResponse {
     private Integer stock;
     private Double price;
 
-    private String brandName;
-    private List<String> categoryNames;
+    private Brand brand;
+    private List<Category> categories;
 
 }

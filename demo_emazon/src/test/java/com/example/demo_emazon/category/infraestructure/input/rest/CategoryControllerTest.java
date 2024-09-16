@@ -3,6 +3,7 @@ package com.example.demo_emazon.category.infraestructure.input.rest;
 import com.example.demo_emazon.category.application.dto.CategoryRequest;
 import com.example.demo_emazon.category.application.dto.CategoryResponse;
 import com.example.demo_emazon.category.application.handler.ICategoryHandler;
+import com.example.demo_emazon.util.Constants;
 import com.example.demo_emazon.util.pagination.Pagination;
 import com.example.demo_emazon.util.TestData.TestDataCategory;
 import org.junit.jupiter.api.Test;
@@ -45,12 +46,12 @@ class CategoryControllerTest {
     @Test
     void testListCategories() {
         // Arrange
-        int page = 1;
-        int size = 10;
-        String sortDirection = "asc";
+        int page = Constants.PAGE_IN_RANGE;
+        int size = Constants.PAGE_SIZE_1;
+        String sortDirection = Constants.SORT_ASC;
 
         CategoryResponse categoryResponse = TestDataCategory.getCategoryResponse();
-        Pagination<CategoryResponse> pagination = new Pagination<>(List.of(categoryResponse), page, size, 1);
+        Pagination<CategoryResponse> pagination = new Pagination<>(List.of(categoryResponse), page, size, Constants.PAGE_SIZE_1);
 
         when(categoryHandler.listCategoryResponses(page, size, sortDirection)).thenReturn(pagination);
 

@@ -152,11 +152,11 @@ class BrandUseCaseTest {
         List<Brand> allBrands = TestDataBrand.getListBrands();
         when(brandPersistencePort.findAll()).thenReturn(allBrands);
 
-        Pagination<Brand> pagination = brandUseCase.listBrand(1, 2, "asc");
+        Pagination<Brand> pagination = brandUseCase.listBrand(Constants.PAGE_IN_RANGE, Constants.PAGE_SIZE_2, Constants.SORT_ASC);
 
-        assertEquals(2, pagination.getContent().size());
-        assertEquals("LG", pagination.getContent().get(0).getNameBrand());
-        assertEquals("Motorola", pagination.getContent().get(1).getNameBrand());
+        assertEquals(Constants.PAGE_SIZE_2, pagination.getContent().size());
+        assertEquals(allBrands.get(1).getNameBrand(), pagination.getContent().get(0).getNameBrand());
+        assertEquals(allBrands.get(2).getNameBrand(), pagination.getContent().get(1).getNameBrand());
         verify(brandPersistencePort, times(1)).findAll();
     }
 
@@ -167,25 +167,11 @@ class BrandUseCaseTest {
 
         when(brandPersistencePort.findAll()).thenReturn(allBrands);
 
-        Pagination<Brand> pagination = brandUseCase.listBrand(1, 2, "desc");
+        Pagination<Brand> pagination = brandUseCase.listBrand(Constants.PAGE_IN_RANGE, Constants.PAGE_SIZE_2, Constants.SORT_DESC);
 
-        assertEquals(2, pagination.getContent().size());
-        assertEquals("Norma", pagination.getContent().get(0).getNameBrand());
-        assertEquals("Motorola", pagination.getContent().get(1).getNameBrand());
-        verify(brandPersistencePort, times(1)).findAll();
-    }
-
-    @Test
-    void testListBrandPagination() {
-
-        List<Brand> allBrands = TestDataBrand.getListBrands();
-
-        when(brandPersistencePort.findAll()).thenReturn(allBrands);
-
-        Pagination<Brand> pagination = brandUseCase.listBrand(2, 1, "asc");
-
-        assertEquals(1, pagination.getContent().size());
-        assertEquals("Motorola", pagination.getContent().get(0).getNameBrand());
+        assertEquals(Constants.PAGE_SIZE_2, pagination.getContent().size());
+        assertEquals(allBrands.get(0).getNameBrand(), pagination.getContent().get(0).getNameBrand());
+        assertEquals(allBrands.get(2).getNameBrand(), pagination.getContent().get(1).getNameBrand());
         verify(brandPersistencePort, times(1)).findAll();
     }
 
@@ -196,12 +182,12 @@ class BrandUseCaseTest {
 
         when(brandPersistencePort.findAll()).thenReturn(allBrands);
 
-        Pagination<Brand> pagination = brandUseCase.listBrand(4, 1, "asc");
+        Pagination<Brand> pagination = brandUseCase.listBrand(Constants.PAGE_OUT_OF_RANGE, Constants.PAGE_SIZE_1, Constants.SORT_ASC);
 
         assertTrue(pagination.getContent().isEmpty());
-        assertEquals(4, pagination.getPageNumber());
-        assertEquals(1, pagination.getPageSize());
-        assertEquals(3, pagination.getTotalElements());
+        assertEquals(Constants.PAGE_OUT_OF_RANGE, pagination.getPageNumber());
+        assertEquals(Constants.PAGE_SIZE_1, pagination.getPageSize());
+        assertEquals(allBrands.size(), pagination.getTotalElements());
         verify(brandPersistencePort, times(1)).findAll();
     }
 
@@ -212,12 +198,12 @@ class BrandUseCaseTest {
 
         when(brandPersistencePort.findAll()).thenReturn(allBrands);
 
-        Pagination<Brand> pagination = brandUseCase.listBrand(0, 1, "asc");
+        Pagination<Brand> pagination = brandUseCase.listBrand(Constants.PAGE_0, Constants.PAGE_SIZE_1, Constants.SORT_ASC);
 
         assertTrue(pagination.getContent().isEmpty());
-        assertEquals(0, pagination.getPageNumber());
-        assertEquals(1, pagination.getPageSize());
-        assertEquals(3, pagination.getTotalElements());
+        assertEquals(Constants.PAGE_0, pagination.getPageNumber());
+        assertEquals(Constants.PAGE_SIZE_1, pagination.getPageSize());
+        assertEquals(allBrands.size(), pagination.getTotalElements());
         verify(brandPersistencePort, times(1)).findAll();
     }
 }

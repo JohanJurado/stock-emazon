@@ -34,11 +34,14 @@ public class ArticleUseCase implements IArticleServicePort {
 
     @Override
     public Article createArticle(Article article) {
-        findByNameBrand(article.getBrand().getNameBrand());
 
-        if (article.getCategories().isEmpty()){
+        if (brandPersistencePort.findByName(article.getBrand().getNameBrand()) == null){
+            throw new BrandNotFoundException(ExceptionConstantsArticle.BRAND_NOT_FOUND.getMessage(), article.getBrand().getNameBrand());
+        }
+
+        if (article.getCategories().isEmpty() || article.getCategories() == null){
             throw new MinimumOfRelatedCategoriesException(ExceptionConstantsArticle.MINIUM_OF_RELATED_CATEGORIES.getMessage());
-        } else if (article.getCategories().size()> ConstantsArticle.MAX_CATEGORIES){
+        } else if (article.getCategories().size() > ConstantsArticle.MAX_CATEGORIES){
             throw new MaximumRelatedCategoriesException(ExceptionConstantsArticle.MAXIUM_RELATED_CATEGORIES.getMessage());
         } else {
             article.getCategories()

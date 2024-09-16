@@ -65,7 +65,7 @@ class CategoryJpaAdapterTest {
 
         List<Category> result = categoryJpaAdapter.findAll();
 
-        assertEquals(2, result.size());
+        assertEquals(Constants.PAGE_SIZE_2, result.size());
         assertEquals(category1, result.get(0));
         assertEquals(category2, result.get(1));
         verify(categoryJpaRepository).findAll();

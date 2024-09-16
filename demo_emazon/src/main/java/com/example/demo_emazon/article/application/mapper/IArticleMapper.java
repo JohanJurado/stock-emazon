@@ -28,15 +28,15 @@ public interface IArticleMapper {
     @Mapping(source = "descriptionArticle", target="descriptionArticle")
     @Mapping(source = "stock", target="stock")
     @Mapping(source = "price", target="price")
-    @Mapping(source = "brand.nameBrand", target = "brandName")
-    @Mapping(expression = "java(getCategoryNames(article))", target = "categoryNames")
+    @Mapping(source = "brand", target = "brand")
+    @Mapping(source = "categories", target = "categories")
     ArticleResponse toResponse(Article article);
 
     // Helper method to get category names
-    default List<String> getCategoryNames(Article article) {
-        return article.getCategories().stream()
-                .map(Category::getNameCategory)
-                .toList();
-    }
+//    default List<String> getCategoryNames(Article article) {
+//        return article.getCategories().stream()
+//                .map(Category::getNameCategory)
+//                .toList();
+//    }
 
 }

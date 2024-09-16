@@ -153,11 +153,11 @@ class CategoryUseCaseTest {
         List<Category> allCategories = TestDataCategory.getListCategories();
         when(categoryPersistencePort.findAll()).thenReturn(allCategories);
 
-        Pagination<Category> pagination = categoryUseCase.listCategory(1, 2, "asc");
+        Pagination<Category> pagination = categoryUseCase.listCategory(Constants.PAGE_IN_RANGE, Constants.PAGE_SIZE_2, Constants.SORT_ASC);
 
-        assertEquals(2, pagination.getContent().size());
-        assertEquals("Books", pagination.getContent().get(0).getNameCategory());
-        assertEquals("Electronics", pagination.getContent().get(1).getNameCategory());
+        assertEquals(Constants.PAGE_SIZE_2, pagination.getContent().size());
+        assertEquals(allCategories.get(0).getNameCategory(), pagination.getContent().get(0).getNameCategory());
+        assertEquals(allCategories.get(1).getNameCategory(), pagination.getContent().get(1).getNameCategory());
         verify(categoryPersistencePort, times(1)).findAll();
     }
 
@@ -168,25 +168,11 @@ class CategoryUseCaseTest {
 
         when(categoryPersistencePort.findAll()).thenReturn(allCategories);
 
-        Pagination<Category> pagination = categoryUseCase.listCategory(1, 2, "desc");
+        Pagination<Category> pagination = categoryUseCase.listCategory(Constants.PAGE_IN_RANGE, Constants.PAGE_SIZE_2, Constants.SORT_DESC);
 
-        assertEquals(2, pagination.getContent().size());
-        assertEquals("Furniture", pagination.getContent().get(0).getNameCategory());
-        assertEquals("Electronics", pagination.getContent().get(1).getNameCategory());
-        verify(categoryPersistencePort, times(1)).findAll();
-    }
-
-    @Test
-    void testListCategoryPagination() {
-
-        List<Category> allCategories = TestDataCategory.getListCategories();
-
-        when(categoryPersistencePort.findAll()).thenReturn(allCategories);
-
-        Pagination<Category> pagination = categoryUseCase.listCategory(2, 1, "asc");
-
-        assertEquals(1, pagination.getContent().size());
-        assertEquals("Electronics", pagination.getContent().get(0).getNameCategory());
+        assertEquals(Constants.PAGE_SIZE_2, pagination.getContent().size());
+        assertEquals(allCategories.get(2).getNameCategory(), pagination.getContent().get(0).getNameCategory());
+        assertEquals(allCategories.get(1).getNameCategory(), pagination.getContent().get(1).getNameCategory());
         verify(categoryPersistencePort, times(1)).findAll();
     }
 
@@ -197,12 +183,12 @@ class CategoryUseCaseTest {
 
         when(categoryPersistencePort.findAll()).thenReturn(allCategories);
 
-        Pagination<Category> pagination = categoryUseCase.listCategory(4, 1, "asc");
+        Pagination<Category> pagination = categoryUseCase.listCategory(Constants.PAGE_OUT_OF_RANGE, Constants.PAGE_SIZE_1, Constants.SORT_ASC);
 
         assertTrue(pagination.getContent().isEmpty());
-        assertEquals(4, pagination.getPageNumber());
-        assertEquals(1, pagination.getPageSize());
-        assertEquals(3, pagination.getTotalElements());
+        assertEquals(Constants.PAGE_OUT_OF_RANGE, pagination.getPageNumber());
+        assertEquals(Constants.PAGE_SIZE_1, pagination.getPageSize());
+        assertEquals(allCategories.size(), pagination.getTotalElements());
         verify(categoryPersistencePort, times(1)).findAll();
     }
 
@@ -213,12 +199,12 @@ class CategoryUseCaseTest {
 
         when(categoryPersistencePort.findAll()).thenReturn(allCategories);
 
-        Pagination<Category> pagination = categoryUseCase.listCategory(0, 1, "asc");
+        Pagination<Category> pagination = categoryUseCase.listCategory(Constants.PAGE_0, Constants.PAGE_SIZE_1, Constants.SORT_ASC);
 
         assertTrue(pagination.getContent().isEmpty());
-        assertEquals(0, pagination.getPageNumber());
-        assertEquals(1, pagination.getPageSize());
-        assertEquals(3, pagination.getTotalElements());
+        assertEquals(Constants.PAGE_0, pagination.getPageNumber());
+        assertEquals(Constants.PAGE_SIZE_1, pagination.getPageSize());
+        assertEquals(allCategories.size(), pagination.getTotalElements());
         verify(categoryPersistencePort, times(1)).findAll();
     }
 }

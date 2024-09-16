@@ -66,7 +66,7 @@ class BrandJpaAdapterTest {
 
         List<Brand> result = brandJpaAdapter.findAll();
 
-        assertEquals(2, result.size());
+        assertEquals(Constants.PAGE_SIZE_2, result.size());
         assertEquals(brand1, result.get(0));
         assertEquals(brand2, result.get(1));
         verify(brandJpaRepository).findAll();

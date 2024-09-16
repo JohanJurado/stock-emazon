@@ -18,6 +18,4 @@ public enum ExceptionConstantsCategory {
         return this.message;
     }
 
-
-
 }

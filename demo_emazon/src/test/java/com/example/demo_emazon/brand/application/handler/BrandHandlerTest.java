@@ -5,6 +5,7 @@ import com.example.demo_emazon.brand.application.dto.BrandResponse;
 import com.example.demo_emazon.brand.application.mapper.IBrandMapper;
 import com.example.demo_emazon.brand.domain.api.IBrandServicePort;
 import com.example.demo_emazon.brand.domain.model.Brand;
+import com.example.demo_emazon.util.Constants;
 import com.example.demo_emazon.util.TestData.TestDataBrand;
 import com.example.demo_emazon.util.pagination.Pagination;
 import org.junit.jupiter.api.DisplayName;
@@ -55,13 +56,13 @@ class BrandHandlerTest {
     @Test
     @DisplayName("Test List Brands Responses")
     void testListBrandResponses() {
-        int pageNumber = 1;
-        int pageSize = 10;
-        String sortDirection = "asc";
+        int pageNumber = Constants.PAGE_IN_RANGE;
+        int pageSize = Constants.PAGE_SIZE_2;
+        String sortDirection = Constants.SORT_ASC;
 
-        List<Brand> content = null;
-        List<BrandResponse> contentResponse = null;
-        int totalElements = 20;
+        List<Brand> content = Constants.NULL_LIST_BRAND;
+        List<BrandResponse> contentResponse = Constants.NULL_LIST_BRANDRESPONSE;
+        int totalElements = Constants.PAGE_SIZE_2;
 
         Pagination<Brand> brandPagination =
                 new Pagination<>(content, pageNumber, pageSize, totalElements);
