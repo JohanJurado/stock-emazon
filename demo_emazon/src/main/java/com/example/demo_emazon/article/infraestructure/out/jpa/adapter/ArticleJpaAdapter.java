@@ -6,6 +6,8 @@ import com.example.demo_emazon.article.infraestructure.out.jpa.mapper.IArticleEn
 import com.example.demo_emazon.article.infraestructure.out.jpa.repository.IArticleJpaRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 public class ArticleJpaAdapter implements IArticlePersistencePort {
 
@@ -17,5 +19,12 @@ public class ArticleJpaAdapter implements IArticlePersistencePort {
         return articleEntityMapper.toArticle(
                 articleJpaRepository.save(articleEntityMapper.toArticleEntity(article))
         );
+    }
+
+    @Override
+    public List<Article> findAll() {
+        return articleJpaRepository.findAll().stream()
+                .map(articleEntityMapper::toArticle)
+                .toList();
     }
 }

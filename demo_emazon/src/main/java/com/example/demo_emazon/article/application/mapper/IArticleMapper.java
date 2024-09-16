@@ -3,11 +3,9 @@ package com.example.demo_emazon.article.application.mapper;
 import com.example.demo_emazon.article.application.dto.ArticleRequest;
 import com.example.demo_emazon.article.application.dto.ArticleResponse;
 import com.example.demo_emazon.article.domain.model.Article;
-import com.example.demo_emazon.category.domain.model.Category;
+import com.example.demo_emazon.util.pagination.Pagination;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface IArticleMapper {
@@ -32,11 +30,8 @@ public interface IArticleMapper {
     @Mapping(source = "categories", target = "categories")
     ArticleResponse toResponse(Article article);
 
-    // Helper method to get category names
-//    default List<String> getCategoryNames(Article article) {
-//        return article.getCategories().stream()
-//                .map(Category::getNameCategory)
-//                .toList();
-//    }
+    Pagination<ArticleResponse> toResposePagination(Pagination<Article> article);
+
+
 
 }

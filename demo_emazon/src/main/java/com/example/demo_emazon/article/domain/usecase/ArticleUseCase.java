@@ -15,10 +15,9 @@ import com.example.demo_emazon.category.domain.exception.CategoryAlreadyExistExc
 import com.example.demo_emazon.category.domain.model.Category;
 import com.example.demo_emazon.category.domain.spi.ICategoryPersistencePort;
 import com.example.demo_emazon.category.domain.util.constants.ExceptionConstantsCategory;
+import com.example.demo_emazon.util.pagination.Pagination;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ArticleUseCase implements IArticleServicePort {
 
@@ -82,5 +81,37 @@ public class ArticleUseCase implements IArticleServicePort {
                     return category;
                 })
                 .toList();
+    }
+
+    @Override
+    public Pagination<Article> listArticles(int number, int size, String sortDirection, String model) {
+        List<Article> allArticles = new ArrayList<>(articlePersistencePort.findAll());
+        Comparator<Article> comparator = Comparator.comparing(Article::getNameArticle);
+
+        if ("article".equalsIgnoreCase(model)){
+            comparator = Comparator.comparing(Article::getNameArticle);
+        } else if ("brand".equalsIgnoreCase(model)){
+            comparator = Comparator.comparing(article -> article.getBrand().getNameBrand());
+        } else if ("category".equalsIgnoreCase(model)){
+            comparator = Comparator.comparing(article -> article.getCategories().get(0).getNameCategory());
+        }
+
+        if ("asc".equalsIgnoreCase(sortDirection)){
+            allArticles.sort(comparator);
+        } else if ("desc".equalsIgnoreCase(sortDirection)){
+            allArticles.sort(comparator.reversed());
+        }
+
+        int totalElements = allArticles.size();
+        int fromIndex = (number-1)*size;
+        int toIndex = Math.min(fromIndex + size, totalElements);
+
+        if (fromIndex >= totalElements || fromIndex < 0) {
+            return new Pagination<>(Collections.emptyList(), number, size, totalElements);
+        }
+
+        List<Article> pageContent = allArticles.subList(fromIndex, toIndex);
+
+        return new Pagination<>(pageContent, number, size, totalElements);
     }
 }
