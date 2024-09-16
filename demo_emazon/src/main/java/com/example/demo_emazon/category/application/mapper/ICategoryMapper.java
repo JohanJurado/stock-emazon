@@ -6,7 +6,6 @@ import com.example.demo_emazon.category.domain.model.Category;
 import com.example.demo_emazon.util.pagination.Pagination;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring")
 public interface ICategoryMapper {

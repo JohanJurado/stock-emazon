@@ -6,7 +6,6 @@ import com.example.demo_emazon.brand.domain.model.Brand;
 import com.example.demo_emazon.util.pagination.Pagination;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")

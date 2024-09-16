@@ -7,6 +7,7 @@ import com.example.demo_emazon.article.domain.api.IArticleServicePort;
 import com.example.demo_emazon.article.domain.model.Article;
 import com.example.demo_emazon.brand.domain.model.Brand;
 import com.example.demo_emazon.category.domain.model.Category;
+import com.example.demo_emazon.util.pagination.Pagination;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,12 @@ public class ArticleHandler implements IArticleHandler{
         article.setCategories(categories);
 
         return articleMapper.toResponse(articleServicePort.createArticle(article));
+    }
+
+    @Override
+    public Pagination<ArticleResponse> listArticles(int number, int size, String sortDirection, String model) {
+        return articleMapper.toResposePagination(
+                articleServicePort.listArticles(number, size, sortDirection, model)
+        );
     }
 }
