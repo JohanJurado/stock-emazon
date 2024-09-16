@@ -25,7 +25,7 @@ public class ArticleController {
 
     @Operation(summary = "Add a new Article")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "1 Article added",
+            @ApiResponse(responseCode = "200", description = "1 Article added",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Book.class)) }),
             @ApiResponse(responseCode = "400", description = "Invalid arguments supplied",

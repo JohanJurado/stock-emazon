@@ -5,7 +5,6 @@ import com.example.demo_emazon.brand.application.dto.BrandResponse;
 import com.example.demo_emazon.brand.domain.model.Brand;
 import com.example.demo_emazon.category.domain.model.Category;
 import com.example.demo_emazon.util.TestData.TestDataArticle;
-import com.example.demo_emazon.util.TestData.TestDataCategory;
 
 import java.util.List;
 
@@ -46,6 +45,9 @@ public final class Constants {
     public static final Integer PAGE_0 = 0;
     public static final Integer PAGE_SIZE_2 = 2;
     public static final Integer PAGE_SIZE_1 = 1;
+    public static final String MODEL_ARTICLE = "article";
+    public static final String MODEL_BRAND = "brand";
+    public static final String MODEL_CATEGORY = "Category";
 
     // Properties Brand, Category and Article
     public static final Long ID = 20L;
